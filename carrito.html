@@ -1,124 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./css/main.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="./css/main.css">
 </head>
-  <body>
-    
-      <div class="wrapper">
-        <aside>
-             <header>
-                  <h1 class="logo">Technology Store</h1>
-             </header>
 
-                          <!-- creo el boton seguir comprando y el boton carrito-->
-              <nav>
-                  <ul>
-                       <li>
-                            <a class="boton-menu boton-volver" href="./index.html">
-                               <i class="bi bi-arrow-return-left"></i>Seguir comprando
-                            </a> 
-                      </li>
-        
-                       <li>
-                          <a class="boton-menu boton-carrito active" href="./carrito.html">
-                                 <i class="bi bi-cart-fill"></i>Carrito
-                           </a>
-                       </li>
-                  </ul>
-              </nav>
+<body>
 
-                         <!--estas son las letras de marca de agua de abajo a la izquierda-->
-                           <footer>
-                              <p class="texto-footer"> <i class="bi bi-android"></i>2023 Technology Store</p>
-                           </footer>
-      </aside>
+  <div class="wrapper">
+    <aside>
+      <header>
+        <h1 class="logo">Technology Store</h1>
+      </header>
 
-        <!---este es el contenido del carrito-->>
-          <main>
-             <h2 class="titulo-principal">Carrito</h2>
-               <div class="contenedor-carrito">
-                 <p id="carrito-vacio" class="carrito-vacio"><i class="bi bi-emoji-frown"></i>Tu carrito esta vacio</p>
+      <!-- creo el boton seguir comprando y el boton carrito-->
+      <nav>
+        <ul>
+          <li>
+            <a class="boton-menu boton-volver" href="./index.html">
+              <i class="bi bi-arrow-return-left"></i>Seguir comprando
+            </a>
+          </li>
 
-                 <div id="carrito-productos" class="carrito-productos">
+          <li>
+            <a class="boton-menu boton-carrito active" href="./carrito.html">Carrito
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-                     <div class="carrito-producto">
-                          <img class="carrito-producto-imagen" src="./img/computadoras/compu1.jpg" alt="">
-                          <div class="carrito-producto-titulo">
-                              <small>Titulo</small>
-                              <h3>Computadora</h3>
-                          </div>
+      <!--estas son las letras de marca de agua de abajo a la izquierda-->
+      <footer>
+        <p class="texto-footer"> <i class="bi bi-android"></i>2023 Technology Store</p>
+      </footer>
+    </aside>
 
-                          <div class="carrito-producto-cantidad">
-                              <small>Cantidad</small>
-                              <p>1</p>
-                          </div>
+    <!---este es el contenido del carrito-->
+    <main>
+      <h2 class="titulo-principal">Carrito de compras</h2>
+      <div class="contenedor-carrito">
+        <h1 id="mensaje-carrito-vacio" class="carrito-vacio hidden">Tu carrito está vacío</h1>
+        <p id="carrito-vacio" class="carrito-vacio"></p>
 
-                          <div class="carrito-producto-precio">
-                              <small>Precio</small>
-                              <p>$500</p>
-                          </div>
+        <div id="carrito-productos" class="carrito-productos"></div>
 
-                          <div class="carrito-producto-subtotal">
-                                 <small>Subtotal</small>
-                                 <p>$500</p>
-                          </div>
-                          <button class="carrito-producto-eliminar"><i class="bi bi-trash-fill"></i></button>
-                      </div>
+      </div>
 
+      <div id="carrito-acciones" class="carrito-acciones disabled">
+        <div class="carrito-acciones-ezquierda">
+          <button class="carrito-acciones-vaciar">Vaciar carrito</button>
+        </div>
 
-                      <div class="carrito-producto">
-                            <img class="carrito-producto-imagen" src="./img/computadoras/compu2.jpg" alt="">
-                           <div class="carrito-producto-titulo">
-                              <small>Titulo</small>
-                              <h3>Computadora</h3>
-                            </div>
+        <div class="carrito-acciones-derecha">
+          <div class="carrito-acciones-total">
+            <p>Total</p>
+            <p id="total">$0</p>
+          </div>
+          <button class="carrito-acciones-comprar">Comprar ahora</button>
+        </div>
+      </div>
 
-                            <div class="carrito-producto-cantidad">
-                                <small>Cantidad</small>
-                                <p>2</p>
-                            </div>
+      <p id="carrito-comprado" class="carrito-comprado disabled">Muchas gracias por tu compra. <i
+          class="bi bi-emoji-laughing"></i></p>
 
-                            <div class="carrito-producto-precio">
-                                <small>Precio</small>
-                                 <p>$600</p>
-                            </div>
+    </main>
+  </div>
 
-                            <div class="carrito-producto-subtotal">
-                               <small>Subtotal</small>
-                               <p>$600</p>
-                            </div>
-                           <button class="carrito-producto-eliminar"><i class="bi bi-trash-fill"></i></button>
-                        </div>
-                   </div>
+  <script src="./js/carrito.js"></script>
 
-                   <div id="carrito-acciones" class="carrito-acciones disabled">
-                        <div class="carrito-acciones-ezquierda">
-                           <button class="carrito-acciones-vaciar">Vaciar carrito</button>
-                        </div>
+</body>
 
-                      <div class="carrito-acciones-derecha">
-                            <div class="carrito-acciones-total">
-                                 <p>Total</p>
-                                 <p id="total">$1100</p>
-                            </div>
-                            <button class="carrito-acciones-comprar">Comprar ahora</button>
-                       </div>
-                   </div>
-  
-                   <p id="carrito-comprado" class="carrito-comprado disabled">Muchas gracias por tu compra. <i class="bi bi-emoji-laughing"></i></p>
-                </div>  
-
-          </main>
-     </div>
-   
-
-       <script src="./js/carrito.js"></script>
-
-    </body>
 </html>

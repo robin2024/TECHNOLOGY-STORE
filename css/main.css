@@ -1,5 +1,7 @@
 
-
+.hidden {
+  display: none;
+}
 
 :root {
     --clr-main: #4b33a8;
