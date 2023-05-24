@@ -1,0 +1,244 @@
+[
+    {
+        "id": "computadora1",
+        "titulo": "Computadora",
+        "imagen": "./img/computadoras/compu1.jpg",
+        "categoria": {
+            "nombre": "Computadora",
+            "id": "computadoras"
+        },
+        "precio": 500
+    },
+    {
+        "id": "computadora2",
+        "titulo": "Computadora",
+        "imagen": "./img/computadoras/compu2.jpg",
+        "categoria": {
+            "nombre": "Computadora",
+            "id": "computadoras"
+        },
+        "precio": 600
+    },
+    {
+        "id": "computadora3",
+        "titulo": "Computadora",
+        "imagen": "./img/computadoras/compu3.jpg",
+        "categoria": {
+            "nombre": "Computadora",
+            "id": "computadoras"
+        },
+        "precio": 700
+    },
+    {
+        "id": "computadora4",
+        "titulo": "Computadora",
+        "imagen": "./img/computadoras/compu4.jpg",
+        "categoria": {
+            "nombre": "Computadora",
+            "id": "computadoras"
+        },
+        "precio": 800
+    },
+    {
+        "id": "computadora5",
+        "titulo": "Computadora",
+        "imagen": "./img/computadoras/compu5.jpg",
+        "categoria": {
+            "nombre": "Computadora",
+            "id": "computadoras"
+        },
+        "precio": 900
+    },
+    {
+        "id": "computadora6",
+        "titulo": "Computadora",
+        "imagen": "./img/computadoras/compu6.jpg",
+        "categoria": {
+            "nombre": "Computadora",
+            "id": "computadoras"
+        },
+        "precio": 1000
+    },
+    {
+        "id": "redes1",
+        "titulo": "Redes",
+        "imagen": "./img/redes/redes1.jpg",
+        "categoria": {
+            "nombre": "Redes",
+            "id": "redes"
+        },
+        "precio": 50
+    },
+    {
+        "id": "redes2",
+        "titulo": "Redes",
+        "imagen": "./img/redes/redes2.jpg",
+        "categoria": {
+            "nombre": "Redes",
+            "id": "redes"
+        },
+        "precio": 50
+    },
+    {
+        "id": "redes3",
+        "titulo": "Redes",
+        "imagen": "./img/redes/redes3.jpg",
+        "categoria": {
+            "nombre": "Redes",
+            "id": "redes"
+        },
+        "precio": 20
+    },
+    {
+        "id": "redes4",
+        "titulo": "Redes",
+        "imagen": "./img/redes/redes4.jpg",
+        "categoria": {
+            "nombre": "Redes",
+            "id": "redes"
+        },
+        "precio": 20
+    },
+    {
+        "id": "redes5",
+        "titulo": "Redes",
+        "imagen": "./img/redes/redes5.jpg",
+        "categoria": {
+            "nombre": "Redes",
+            "id": "redes"
+        },
+        "precio": 20
+    },
+    {
+        "id": "redes6",
+        "titulo": "Redes",
+        "imagen": "./img/redes/redes6.jpg",
+        "categoria": {
+            "nombre": "Redes",
+            "id": "redes"
+        },
+        "precio": 20
+    },
+
+
+    {
+        "id": "cables1",
+        "titulo": "Cables",
+        "imagen": "./img/cables/cables1.jpg",
+        "categoria": {
+            "nombre": "Cables",
+            "id": "cables"
+        },
+        "precio": 10
+    },
+    {
+        "id": "cables2",
+        "titulo": "Cables",
+        "imagen": "./img/cables/cables2.jpg",
+        "categoria": {
+            "nombre": "Cables",
+            "id": "cables"
+        },
+        "precio": 5
+    },
+    {
+        "id": "cables3",
+        "titulo": "Cables",
+        "imagen": "./img/cables/cables3.jpg",
+        "categoria": {
+            "nombre": "Cables",
+            "id": "cables"
+        },
+        "precio": 5
+    },
+    {
+        "id": "cables4",
+        "titulo": "Cables",
+        "imagen": "./img/cables/cables4.jpg",
+        "categoria": {
+            "nombre": "Cables",
+            "id": "cables"
+        },
+        "precio": 5
+    },
+    {
+        "id": "cables5",
+        "titulo": "Cables",
+        "imagen": "./img/cables/cables5.jpg",
+        "categoria": {
+            "nombre": "Cables",
+            "id": "cables"
+        },
+        "precio": 10
+    },
+    {
+        "id": "cables6",
+        "titulo": "Cables",
+        "imagen": "./img/cables/cables6.jpg",
+        "categoria": {
+            "nombre": "Cables",
+            "id": "cables"
+        },
+        "precio": 10
+    },
+    {
+        "id": "audio1",
+        "titulo": "Audio",
+        "imagen": "./img/audio/audio1.jpg",
+        "categoria": {
+            "nombre": "Audio",
+            "id": "audios"
+        },
+        "precio": 20
+    },
+    {
+        "id": "audio2",
+        "titulo": "Audio",
+        "imagen": "./img/audio/audio2.jpg",
+        "categoria": {
+            "nombre": "Audio",
+            "id": "audios"
+        },
+        "precio": 30
+    },
+    {
+        "id": "audio3",
+        "titulo": "Audio",
+        "imagen": "./img/audio/audio3.jpg",
+        "categoria": {
+            "nombre": "Audio",
+            "id": "audios"
+        },
+        "precio": 30
+    },
+    {
+        "id": "audio4",
+        "titulo": "Audio",
+        "imagen": "./img/audio/audio4.jpg",
+        "categoria": {
+            "nombre": "Audio",
+            "id": "audios"
+        },
+        "precio": 20
+    },
+    {
+        "id": "audio5",
+        "titulo": "Audio",
+        "imagen": "./img/audio/audio5.jpg",
+        "categoria": {
+            "nombre": "Audio",
+            "id": "audios"
+        },
+        "precio": 20
+    },
+    {
+        "id": "audio6",
+        "titulo": "Audio",
+        "imagen": "./img/audio/audio6.jpg",
+        "categoria": {
+            "nombre": "Audio",
+            "id": "audios"
+        },
+        "precio": 800
+    }
+]

@@ -1,176 +1,170 @@
-// Obtener los productos del carrito desde el almacenamiento local
-const productosEnCarrito = JSON.parse(localStorage.getItem("productos-en-carrito"));
+let productosEnCarrito = localStorage.getItem("productos-en-carrito");
+productosEnCarrito = JSON.parse(productosEnCarrito);
 
-// Obtener los elementos del DOM
 const contenedorCarritoVacio = document.querySelector("#carrito-vacio");
-const contenedorProductos = document.querySelector("#carrito-productos");
+const contenedorCarritoProductos = document.querySelector("#carrito-productos");
 const contenedorCarritoAcciones = document.querySelector("#carrito-acciones");
 const contenedorCarritoComprado = document.querySelector("#carrito-comprado");
-const botonVaciarCarrito = document.querySelector(".carrito-acciones-vaciar");
-const mensajeCarritoVacio = document.querySelector("#mensaje-carrito-vacio");
-const totalElement = document.getElementById('total');
-const botonComprar = document.querySelector(".carrito-acciones-comprar");
+let botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar");
+const botonVaciar = document.querySelector("#carrito-acciones-vaciar");
+const contenedorTotal = document.querySelector("#total");
+const botonComprar = document.querySelector("#carrito-acciones-comprar");
 
-// Función para mostrar los productos en el carrito
-function mostrarProductosEnCarrito() {
-    // Limpiar el contenedor de productos antes de mostrar los nuevos
-    contenedorProductos.innerHTML = "";
 
-    // Mostrar los productos en el carrito
+function cargarProductosCarrito() {
     if (productosEnCarrito && productosEnCarrito.length > 0) {
-        // Hay productos en el carrito, mostrarlos en la interfaz
+
         contenedorCarritoVacio.classList.add("disabled");
+        contenedorCarritoProductos.classList.remove("disabled");
         contenedorCarritoAcciones.classList.remove("disabled");
-        mensajeCarritoVacio.classList.add("hidden");
-
-        // Recorrer los productos y generar el HTML correspondiente para cada uno
-        productosEnCarrito.forEach((producto, indice) => {
-            // Generar el HTML del producto
-            const productoHTML = `
-        <div class="carrito-producto">
-            <img class="carrito-producto-imagen" src="${producto.imagen}" alt="">
-            <div class="carrito-producto-titulo">
-            <small>Titulo</small>
-            <h3>${producto.titulo}</h3>
-        </div>
-
-        <div class="carrito-producto-cantidad">
-            <small>Cantidad</small>
-            <p>${producto.cantidad}</p>
-        </div>
-
-        <div class="carrito-producto-precio">
-            <small>Precio</small>
-            <p>$${producto.precio}</p>
-        </div>
-
-        <div class="carrito-producto-subtotal">
-            <small>Subtotal</small>
-            <p>$${producto.cantidad * producto.precio}</p>
-        </div>
-            <button class="carrito-producto-eliminar" data-indice="${indice}"><i class="bi bi-trash-fill"></i></button>
-        </div>
-        `;
-
-            // Agregar el HTML del producto al contenedor de productos
-            contenedorProductos.insertAdjacentHTML("beforeend", productoHTML);
-        });
-
-        // Agregar eventos de escucha a los botones de eliminar producto
-        const botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar");
-        botonesEliminar.forEach((boton, indice) => {
-            boton.addEventListener("click", () => {
-                eliminarProducto(indice);
-            });
-        });
+        contenedorCarritoComprado.classList.add("disabled");
+    
+        contenedorCarritoProductos.innerHTML = "";
+    
+        productosEnCarrito.forEach(producto => {
+    
+            const div = document.createElement("div");
+            div.classList.add("carrito-producto");
+            div.innerHTML = `
+                <img class="carrito-producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
+                <div class="carrito-producto-titulo">
+                    <small>Título</small>
+                    <h3>${producto.titulo}</h3>
+                </div>
+                <div class="carrito-producto-cantidad">
+                    <small>Cantidad</small>
+                    <p>${producto.cantidad}</p>
+                </div>
+                <div class="carrito-producto-precio">
+                    <small>Precio</small>
+                    <p>$${producto.precio}</p>
+                </div>
+                <div class="carrito-producto-subtotal">
+                    <small>Subtotal</small>
+                    <p>$${producto.precio * producto.cantidad}</p>
+                </div>
+                <button class="carrito-producto-eliminar" id="${producto.id}"><i class="bi bi-trash-fill"></i></button>
+            `;
+    
+            contenedorCarritoProductos.append(div);
+        })
+    
+    actualizarBotonesEliminar();
+    actualizarTotal();
+	
     } else {
-        // No hay productos en el carrito, mostrar mensaje de carrito vacío
         contenedorCarritoVacio.classList.remove("disabled");
+        contenedorCarritoProductos.classList.add("disabled");
         contenedorCarritoAcciones.classList.add("disabled");
-        mensajeCarritoVacio.classList.remove("hidden");
+        contenedorCarritoComprado.classList.add("disabled");
     }
+
 }
 
-function eliminarProducto(indice) {
-    // Verificar si el índice es válido
-    if (indice >= 0 && indice < productosEnCarrito.length) {
-      // Obtener el producto a eliminar
-      const producto = productosEnCarrito[indice];
-  
-      // Obtener la cantidad a eliminar mediante una ventana de diálogo
-      const cantidadAEliminar = prompt(`Ingresa la cantidad de ${producto.titulo} que deseas eliminar:`);
-  
-      // Verificar si se ingresó una cantidad válida
-      if (cantidadAEliminar !== null && !isNaN(cantidadAEliminar) && cantidadAEliminar > 0) {
-        // Convertir la cantidad ingresada a un número entero
-        const cantidad = parseInt(cantidadAEliminar, 10);
-  
-        // Verificar si la cantidad ingresada es menor o igual a la cantidad actual del producto
-        if (cantidad <= producto.cantidad) {
-          // Restar la cantidad ingresada del producto
-          producto.cantidad -= cantidad;
-  
-          // Verificar si la cantidad llega a 0 para eliminar el producto del carrito
-          if (producto.cantidad === 0) {
-            productosEnCarrito.splice(indice, 1);
-          }
-  
-          // Actualizar el almacenamiento local con el nuevo arreglo de productosEnCarrito
-          localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
-  
-          // Volver a mostrar los productos en el carrito actualizados
-          mostrarProductosEnCarrito();
-  
-          // Calcular el total actualizado
-          calcularTotal();
-        } else {
-          alert("La cantidad ingresada es mayor a la cantidad actual del producto en el carrito.");
-        }
-      } else {
-        alert("La cantidad ingresada no es válida.");
-      }
-    }
-  }
+cargarProductosCarrito();
 
-// Función para calcular el total
-function calcularTotal() {
-    // Obtén todos los elementos HTML que contienen los subtotales de los productos
-    const subtotalesElements = document.getElementsByClassName('carrito-producto-subtotal');
+function actualizarBotonesEliminar() {
+    botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar");
 
-    // Inicializa el total como 0
-    let total = 0;
-
-    // Recorre todos los elementos de los subtotales y suma sus valores al total
-    for (let i = 0; i < subtotalesElements.length; i++) {
-        const subtotal = parseFloat(subtotalesElements[i].getElementsByTagName('p')[0].textContent.replace('$', ''));
-        total += subtotal;
-    }
-
-    // Actualiza el elemento HTML con el total
-    totalElement.textContent = `$${total.toFixed(2)}`;
-}
-
-// Llama a la función calcularTotal para calcular el total inicial al cargar la página
-window.addEventListener('load', () => {
-    mostrarProductosEnCarrito();
-    calcularTotal();
-});
-
-// Vaciar el carrito al hacer clic en el botón "Vaciar carrito"
-botonVaciarCarrito.addEventListener("click", () => {
-    // Limpiar los productos en el carrito del almacenamiento local
-    localStorage.removeItem("productos-en-carrito");
-
-    // Mostrar el mensaje de carrito vacío
-    contenedorCarritoVacio.classList.remove("disabled");
-    contenedorCarritoAcciones.classList.add("disabled");
-    mensajeCarritoVacio.classList.remove("hidden");
-
-    // Limpiar el contenedor de productos
-    contenedorProductos.innerHTML = "";
-
-    // Actualizar el total a 0
-    totalElement.textContent = "$0.00";
-});
-
-// Evento de clic del botón "Comprar ahora"
-botonComprar.addEventListener("click", () => {
-    // Obtener la cantidad de productos comprados
-    const cantidadProductos = productosEnCarrito.reduce((total, producto) => total + producto.cantidad, 0);
-
-    // Obtener el total de la compra
-    let totalCompra = 0;
-    productosEnCarrito.forEach(producto => {
-        totalCompra += producto.cantidad * producto.precio;
+    botonesEliminar.forEach(boton => {
+        boton.addEventListener("click", eliminarDelCarrito);
     });
+}
 
-    // Vaciar los productos en el carrito del almacenamiento local
-    localStorage.removeItem("productos-en-carrito");
+function eliminarDelCarrito(e) {
+    const idBoton = e.currentTarget.id;
+    const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
+    const productoSeleccionado = productosEnCarrito[index];
 
-    // Mostrar un mensaje de compra exitosa con la información
-    const mensaje = `¡Tu compra se realizó con éxito! Has comprado ${cantidadProductos} producto(s) por un total de $${totalCompra.toFixed(2)}.`;
-    alert(mensaje);
+    Swal.fire({
+        title: 'Eliminar producto',
+        html: `
+            <p>Ingrese la cantidad de productos que desea eliminar:</p>
+            <input type="number" id="input-cantidad" min="1" max="${productoSeleccionado.cantidad}" value="1" step="1" class="swal2-input">
+        `,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true,
+        preConfirm: () => {
+            const inputCantidad = Swal.getPopup().querySelector('#input-cantidad');
+            return inputCantidad.value;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const cantidadEliminar = parseInt(result.value);
+            if (cantidadEliminar > 0) {
+                if (cantidadEliminar >= productoSeleccionado.cantidad) {
+                    productosEnCarrito.splice(index, 1);
+                } else {
+                    productoSeleccionado.cantidad -= cantidadEliminar;
+                }
+                cargarProductosCarrito();
+                localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
 
-    // Redirigir al usuario a otra página después de mostrar el mensaje
-    window.location.href = "compra.html";
-});
+                Toastify({
+                    text: 'Producto(s) eliminado(s)',
+                    duration: 3000,
+                    close: true,
+                    gravity: 'top',
+                    position: 'right',
+                    stopOnFocus: true,
+                    style: {
+                        background: 'linear-gradient(to right, #4b33a8, #785ce9)',
+                        borderRadius: '2rem',
+                        textTransform: 'uppercase',
+                        fontSize: '.75rem'
+                    },
+                    offset: {
+                        x: '1.5rem',
+                        y: '1.5rem'
+                    },
+                    onClick: function(){}
+                }).showToast();
+            }
+        }
+    });
+}
+
+botonVaciar.addEventListener("click", vaciarCarrito);
+function vaciarCarrito() {
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        icon: 'question',
+        html: `Se van a borrar ${productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)} productos.`,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            productosEnCarrito.length = 0;
+            localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+            cargarProductosCarrito();
+        }
+      })
+}
+
+
+function actualizarTotal() {
+    const totalCalculado = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0);
+    total.innerText = `$${totalCalculado}`;
+}
+
+botonComprar.addEventListener("click", comprarCarrito);
+function comprarCarrito() {
+
+    productosEnCarrito.length = 0;
+    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+    
+    contenedorCarritoVacio.classList.add("disabled");
+    contenedorCarritoProductos.classList.add("disabled");
+    contenedorCarritoAcciones.classList.add("disabled");
+    contenedorCarritoComprado.classList.remove("disabled");
+
+    window.location.href = 'compra.html';
+
+
+}
